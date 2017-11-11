@@ -1,11 +1,12 @@
-const header = require('./modules/header/header');
-const footer = require('./modules/footer/footer');
-const main = require('./modules/main/main');
-const $ = require('jquery');
+import {header} from './modules/header/header';
+import {footer} from './modules/footer/footer';
+import {main} from  './modules/main/main';
+import $ from 'jquery';
+
+import './app.scss';
+
+
 const body = $('body');
-
-require('./app.scss');
-
 $(function(){
   body.append(header, main, footer);
 });

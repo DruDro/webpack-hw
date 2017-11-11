@@ -2,6 +2,42 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const args = require('yargs').argv;
+
+const plugins = [
+    new HtmlWebpackPlugin({
+        title: 'My first module', // позволяет установить текст тега title
+        filename: 'index.html' // имя результирующего файла
+    }),
+    new webpack
+        .optimize
+        .CommonsChunkPlugin({name: 'vendor'}),
+    new webpack.HotModuleReplacementPlugin()
+];
+
+let styleLoader = [
+    {
+        loader: "style-loader"
+    }, {
+        loader: "css-loader"
+    }, {
+        loader: "sass-loader"
+    }
+];
+
+if (args.env && args.env.styles) {
+    plugins.push(new ExtractTextPlugin({filename: args.env.hash ? '[contenthash]-styles.css':'styles.css'}));
+    styleLoader = ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+            {
+                loader: "css-loader"
+            }, {
+                loader: "sass-loader"
+            }
+        ]
+    });
+}
 
 module.exports = {
     entry: {
@@ -18,27 +54,15 @@ module.exports = {
         rules: [
             {
                 test: /\.s?css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: "css-loader"
-                        }, {
-                            loader: "sass-loader"
-                        }
-                    ]
-                })
+                use: styleLoader
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'My first module', // позволяет установить текст тега title
-            filename: 'main.html' // имя результирующего файла
-        }),
-        new webpack
-            .optimize
-            .CommonsChunkPlugin({name: 'vendor'}),
-        new ExtractTextPlugin({filename: 'styles.css'})
-    ]
+    plugins: plugins,
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        port: 9000,
+        hot: true
+    }
 };

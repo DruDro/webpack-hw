@@ -1,4 +1,4 @@
-const builder = require('../elementBuilder');
+import {builder} from '../elementBuilder';
 
 const date = new Date(); 
 const content = `
@@ -34,4 +34,4 @@ const content = `
   <li>20</li>
 </ul>`;
 
-module.exports = builder('main', content, 'main');
+export const main = builder('main', content, 'main');

@@ -1,7 +1,7 @@
-const $ = require('jquery');
+import $ from 'jquery';
 
 
-module.exports = (tag = 'div', content = '', className = 'box') => {
+export const builder = (tag = 'div', content = '', className = 'box') => {
   const element = $(`<${tag} class="${className}">${content}</${tag}`);
   return element;
 };

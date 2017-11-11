@@ -9,8 +9,7 @@
 
 @for $i from 1 through 10 {
   .width#{$i}{
-    $width: $i*10%;
-    width: $width;
+    width: $i*10%;
   }
 }
 

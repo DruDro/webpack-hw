@@ -1,6 +1,6 @@
-const builder = require('./../elementBuilder');
+import {builder} from './../elementBuilder';
 const content = '<p>Easycode 2017 (c)</p>';
 
-require('./footer.scss');
+import './footer.scss';
 
-module.exports = builder('footer', content, 'footer');
+export const footer  = builder('footer', content, 'footer');
