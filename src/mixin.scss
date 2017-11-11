@@ -1,0 +1,32 @@
+@mixin round($angle: 10px){
+  border-radius: $angle;
+}
+
+@mixin triangle($size: 50px, $direction: up, $color: #000){
+  display:block;
+  font-size:0;
+  line-height:0;
+  &:before {
+    display:block;
+    content:"";
+    border-style:solid;
+    width:0;
+    height:0;
+    @if $direction == down {
+      border-color: $color transparent transparent transparent;
+      border-width: $size $size/1.5 0 $size/1.5;
+    } 
+    @if $direction == up{      
+      border-color: transparent transparent $color transparent;
+      border-width: 0 $size/1.5 $size $size/1.5;
+    }
+    @if $direction == right{      
+      border-color: transparent transparent transparent $color;
+      border-width: $size/1.5 0 $size/1.5 $size;
+    }
+    @if $direction == left{      
+      border-color: transparent $color transparent transparent;
+      border-width: $size/1.5 $size $size/1.5 0;
+    }
+  }
+}

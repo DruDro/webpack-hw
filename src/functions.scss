@@ -1,0 +1,28 @@
+@function getPart($numb, $percent){
+  @return ($numb / 100) * $percent; 
+}
+
+@function getDarken($color){
+  @return darken($color, 20%);
+}
+
+
+@for $i from 1 through 10 {
+  .width#{$i}{
+    $width: $i*10%;
+    width: $width;
+  }
+}
+
+@function randomRGB(){  
+  $red: random(256) - 1;
+  $green: random(256) - 1;
+  $blue: random(256) - 1;  
+  @return rgb($red, $green, $blue);
+}
+
+@for $i from 1 through 20 {
+  li:nth-child(#{$i}){
+    background:randomRGB();
+  }
+}

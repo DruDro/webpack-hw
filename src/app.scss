@@ -1,0 +1,28 @@
+  $main-bg: #eee;
+  $main-fsize: 14px;
+  @import 'functions';
+  @import 'mixin';
+  body {
+    background: $main-bg;
+    font: $main-fsize Arial, Helvetica, sans-serif;
+  }
+
+  header {
+    background: getDarken(#fff);
+    font-size: getPart($main-fsize, 120);
+  }
+
+  .triangle {
+    &--down {
+      @include triangle(150px, down, randomRGB());
+    }
+    &--up {
+      @include triangle(150px, up, randomRGB());
+    }
+    &--right {
+      @include triangle(150px, right, randomRGB());
+    }
+    &--left {
+      @include triangle(150px, left, randomRGB());
+    }
+  }
